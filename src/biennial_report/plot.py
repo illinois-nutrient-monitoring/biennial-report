@@ -5,6 +5,10 @@ import pandas as pd
 import xarray as xr
 import matplotlib.pyplot as plt
 
+
+def print_period(years):
+    return f'{years[0]}-{years[-1]}'
+
 def title_axes(ax):
     ax.set_xlabel( ax.get_xlabel().title())
     ax.set_ylabel( ax.get_ylabel().title())
@@ -33,7 +37,7 @@ def plot_mean_error(ds, period, color, ax, linewidth=2, extend=None):
 
     xmin = pd.to_datetime(str(period[0]))
     xmax = pd.to_datetime(str(period[-1]))
-    ax.hlines(y=mean, xmin=xmin, xmax=xmax, linewidth=linewidth, color=color)
+    ax.hlines(y=mean, xmin=xmin, xmax=xmax, linewidth=linewidth, color=color, label=print_period(period))
     ax.hlines(y=mean+1.96*se, xmin=xmin, xmax=xmax, linewidth=1, ls='-', color=color)
     ax.hlines(y=mean-1.96*se, xmin=xmin, xmax=xmax, linewidth=1, ls='-', color=color)
     
@@ -71,8 +75,19 @@ def running_average_plot(ds1,
                     color='black',
                     ax=ax)
 
-    ds1.plot(marker='o', color='k', linestyle='None', markeredgecolor='k', markerfacecolor='None', ax=ax)
-    ds2.plot(marker='o', color='k', linestyle='None', markeredgecolor='k', markerfacecolor='k', ax=ax)
+    ds1.plot(marker='o', color='k', 
+             linestyle='None', 
+             markeredgecolor='k', 
+             markerfacecolor='None', 
+             ax=ax,
+             label=ds1.attrs.get('label'))
+    
+    ds2.plot(marker='o', color='k', 
+             linestyle='None', 
+             markeredgecolor='k', 
+             markerfacecolor='k', 
+             ax=ax,
+             label=ds2.attrs.get('label'))
 
     #annotate_difference(p1_mean, p2_mean, loc, ax)
     annotate_difference(p2_mean, loc, ax)
