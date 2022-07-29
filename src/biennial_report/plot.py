@@ -59,9 +59,11 @@ def running_average_plot(ds1,
     p1_mean = p1_ds.mean()
 
     if ds2 is None:
-        ds2 = ds1
-
-    p2_ds = ds2.sel(year=ds2.year.dt.year.isin(period2))
+        temp = ds1
+    else:
+        temp = ds2
+        
+    p2_ds = temp.sel(year=temp.year.dt.year.isin(period2))
     p2_mean = p2_ds.mean()
    
     plot_mean_error(ds=p1_ds,
@@ -69,6 +71,7 @@ def running_average_plot(ds1,
                     color='red',
                     extend=period2[0],
                     ax=ax)
+    
     
     plot_mean_error(ds=p2_ds,
                     period=period2,
@@ -82,12 +85,13 @@ def running_average_plot(ds1,
              ax=ax,
              label=ds1.attrs.get('label'))
     
-    ds2.plot(marker='o', color='k', 
-             linestyle='None', 
-             markeredgecolor='k', 
-             markerfacecolor='k', 
-             ax=ax,
-             label=ds2.attrs.get('label'))
+    if ds2 is not None: 
+        ds2.plot(marker='o', color='k', 
+                 linestyle='None', 
+                 markeredgecolor='k', 
+                 markerfacecolor='k', 
+                 ax=ax,
+                 label=ds2.attrs.get('label'))
 
     #annotate_difference(p1_mean, p2_mean, loc, ax)
     annotate_difference(p2_mean, loc, ax)
