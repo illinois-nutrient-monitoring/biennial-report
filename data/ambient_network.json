@@ -1,4 +1,45 @@
 [
+
+    {
+        "river"    : "Embarras",
+        "location" : "at Ste. Mairie",
+        "gage_id"  : "03345500",
+        "iepa_id"  : "BE-07",
+        "scale_factor" : 1
+    },
+
+    {
+        "river"    : "Little Wabash",
+        "location" : "at Carmi",
+        "gage_id"  : "03381500",
+        "iepa_id"  : "C-23",
+        "scale_factor" : 1
+    },
+
+    {
+        "river"    : "Big Muddy",
+        "location" : "at Murphysboro",
+        "gage_id"  : "05599490",
+        "iepa_id"  : "N-12",
+        "scale_factor" : 1
+    },
+
+    {
+        "river"    : "Kaskaskia",
+        "location" : "at Venedy Station",
+        "gage_id"  : "05594100",
+        "iepa_id"  : "O-20",
+        "scale_factor" : 1
+    },
+
+    {
+        "river"    : "Illinois",
+        "location" : "at Valley City",
+        "gage_id"  : "05586100",
+        "iepa_id"  : "D-32",
+        "scale_factor" : 0.84
+    },
+
     {
         "river"    : "Rock",
         "location" : "at Joslin",
@@ -22,46 +63,6 @@
         "location" : "at Geneseo",
         "gage_id"  : "05447500",
         "iepa_id"  : "PB-04",
-        "scale_factor" : 1
-    },
-
-    {
-        "river"    : "Illinois",
-        "location" : "at Valley City",
-        "gage_id"  : "05586100",
-        "iepa_id"  : "D-32",
-        "scale_factor" : 0.84
-    },
-
-    {
-        "river"    : "Kaskaskia",
-        "location" : "at Venedy Station",
-        "gage_id"  : "05594100",
-        "iepa_id"  : "O-20",
-        "scale_factor" : 1
-    },
-
-    {
-        "river"    : "Big Muddy",
-        "location" : "at Murphysboro",
-        "gage_id"  : "05599490",
-        "iepa_id"  : "N-12",
-        "scale_factor" : 1
-    },
-
-    {
-        "river"    : "Little Wabash",
-        "location" : "at Carmi",
-        "gage_id"  : "03381500",
-        "iepa_id"  : "C-23",
-        "scale_factor" : 1
-    },
-
-    {
-        "river"    : "Embarras",
-        "location" : "at Ste. Mairie",
-        "gage_id"  : "03345500",
-        "iepa_id"  : "BE-07",
         "scale_factor" : 1
     },
 

@@ -1,5 +1,45 @@
 [
     {
+        "river"    : "Embarras",
+        "location" : "at Ste. Mairie",
+        "gage_id"  : "03346500", 
+        "iepa_id"  : "BE-01",
+        "scale_factor" : 0.6498
+    },
+
+    {
+        "river"    : "Little Wabash",
+        "location" : "at Carmi",
+        "gage_id"  : "03381495",
+        "iepa_id"  : "C-23",
+        "scale_factor" : 1
+    },
+
+    {
+        "river"    : "Big Muddy",
+        "location" : "at Murphysboro",
+        "gage_id"  : "05599490",
+        "iepa_id"  : "N-12",
+        "scale_factor" : 1
+    },
+
+    {
+        "river"    : "Kaskaskia",
+        "location" : "at Venedy Station",
+        "gage_id"  : "05595000",
+        "iepa_id"  : "0-20",
+        "scale_factor" : 0.8465
+    },
+
+    {
+        "river"    : "Illinois",
+        "location" : "at Valley City",
+        "gage_id"  : "05586300",
+        "iepa_id"  : "D-32",
+        "scale_factor" : 0.84
+    },
+
+    {
         "river"    : "Rock",
         "location" : "at Joslin",
         "gage_id"  : "05446500",
@@ -23,46 +63,6 @@
         "gage_id"  : "05447500",
         "iepa_id"  : "PB-04",
         "scale_factor" : 1
-    },
-
-    {
-        "river"    : "Illinois",
-        "location" : "at Valley City",
-        "gage_id"  : "05586300",
-        "iepa_id"  : "D-32",
-        "scale_factor" : 0.84
-    },
-
-    {
-        "river"    : "Kaskaskia",
-        "location" : "at Venedy Station",
-        "gage_id"  : "05595000",
-        "iepa_id"  : "0-20",
-        "scale_factor" : 0.8465
-    },
-
-    {
-        "river"    : "Big Muddy",
-        "location" : "at Murphysboro",
-        "gage_id"  : "05599490",
-        "iepa_id"  : "N-12",
-        "scale_factor" : 1
-    },
-
-    {
-        "river"    : "Little Wabash",
-        "location" : "at Carmi",
-        "gage_id"  : "03381495",
-        "iepa_id"  : "C-23",
-        "scale_factor" : 1
-    },
-
-    {
-        "river"    : "Embarras",
-        "location" : "at Ste. Mairie",
-        "gage_id"  : "03346500", 
-        "iepa_id"  : "BE-01",
-        "scale_factor" : 0.6498
     },
 
     {
