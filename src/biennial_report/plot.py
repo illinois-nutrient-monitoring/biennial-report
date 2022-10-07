@@ -125,20 +125,37 @@ def append_total(ds, label='Statewide'):
     return xr.concat([total, ds], dim='river')
 
 
-def plot_by_basin(period_ds, ax=None, color='k'):
+def plot_by_basin(period_ds,
+                  ax=None, color='k',
+                  compute_total=True,
+                  scale_total=1,
+                  mode='load',
+                  da=None):
+    
     if ax is None:
         fig, ax = plt.subplots()
-
+        
+    if compute_total:
+        period_ds = append_total(period_ds, scale_total=scale_total, mode=mode, da=da)
+    
+    title = period_ds.name
     mean, se = mean_and_se(period_ds, dim='year')
     mean = mean.to_series()
     se = se.to_series()
+    
     mean.plot.bar(ax=ax, yerr=se*1.96, color=color, edgecolor='k', capsize=4)
 
-    
+    units = period_ds.pint.units
+    ax.set_ylabel(f'{title} [{units}]'.capitalize())
+    ax.set_xlabel('')
+    ax.axhline(y=0, lw=1, color='k')    
 
 def plot_change_by_basin(period1_ds, period2_ds,
                          ax=None, color='k',
-                         mode='load', da=None):
+                         compute_total=True,
+                         scale_total=1,
+                         mode='load',
+                         da=None):
     '''
     ds1 = ambient_loads[parameter].sel(year=ambient_loads.year.dt.year.isin(baseline_years)).mean(dim='year')
     ds2 = supergage_loads[parameter].sel(year=supergage_loads.year.dt.year.isin(study_years)).mean(dim='year')
@@ -147,10 +164,12 @@ def plot_change_by_basin(period1_ds, period2_ds,
         fig, ax = plt.subplots()
 
     title = period1_ds.name
+    
 
     # append total
-    period1_ds = append_total(period1_ds, mode=mode, da=da)
-    period2_ds = append_total(period2_ds, mode=mode, da=da)
+    if compute_total:
+        period1_ds = append_total(period1_ds, scale_total=scale_total, mode=mode, da=da)
+        period2_ds = append_total(period2_ds, scale_total=scale_total, mode=mode, da=da)
 
     mean1, se1 = mean_and_se(period1_ds, dim='year')
     mean2, se2 = mean_and_se(period2_ds, dim='year')
@@ -159,6 +178,7 @@ def plot_change_by_basin(period1_ds, period2_ds,
     difference_se = np.sqrt(se1**2 + se2**2).to_series()
 
 
+    #difference.plot.bar(ax=ax, color=color, edgecolor='k', capsize=4)
     difference.plot.bar(ax=ax, yerr=difference_se*1.96, color=color, edgecolor='k', capsize=4)
 
     units = period1_ds.pint.units
@@ -168,9 +188,12 @@ def plot_change_by_basin(period1_ds, period2_ds,
     #format_axes(ax)
 
     
-def append_total(ds, label='Statewide', mode='load', da=None):
+def append_total(ds, label='Statewide', scale_total=1, mode='load', da=None):
+    #XXXchange to warn
+    #assert not (scale_total!=1 and mode=='yield'), "Don't use scale_total with yield=True"
+    
     if mode=='load':
-        total = ds.sum(dim='river')
+        total = ds.sum(dim='river') * scale_total
 
     elif mode == 'yield':
         total = ds.sum(dim='river')/da.sum()
@@ -185,5 +208,41 @@ def format_yaxis(ax):
 def format_xaxis(ax):
     ax.get_xaxis().set_major_formatter(
     matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ','))) 
-#current_streamflow = mean_flow.sel(year=mean_flow.year.dt.year.isin(study_years))
-#current_streamflow = mean_flow.sel(year=mean_flow.year.dt.year.isin(study_years))
+
+    
+#def plot_change_by_basin(ds,
+#                         ax=None, color='k',
+#                         compute_total=True,
+#                         mode='load',
+#                         da=None):
+#    '''
+#    ds1 = ambient_loads[parameter].sel(year=ambient_loads.year.dt.year.isin(baseline_years)).mean(dim='year')
+#    ds2 = supergage_loads[parameter].sel(year=supergage_loads.year.dt.year.isin(study_years)).mean(dim='year')
+#    '''
+#    if ax is None:
+#        fig, ax = plt.subplots()
+#
+#    title = ds.name
+#
+#    # append total
+#    if compute_total:
+#        ds = append_total(ds, mode=mode, da=da)
+#        #period2_ds = append_total(period2_ds, mode=mode, da=da)
+#
+#    #mean, se = mean_and_se(ds, dim='year')
+#    #mean2, se2 = mean_and_se(period2_ds, dim='year')
+#    dim='year'
+#    mean = ds.mean(dim=dim)
+#    se = ds.std(dim=dim) / np.sqrt(ds.sizes[dim])
+#    #difference = (mean2 - mean1).to_series()
+#    #difference_se = np.sqrt(se1**2 + se2**2).to_series()
+#    mean = mean.to_series()
+#    se = se.to_series()
+#
+#    mean.plot.bar(ax=ax, yerr=se*1.96, color=color, edgecolor='k', capsize=4)
+#
+#    units = ds.pint.units
+#    ax.set_ylabel(f'{title} [{units}]'.capitalize())
+#    ax.set_xlabel('')
+#    ax.axhline(y=0, lw=1, color='k')
+#    #format_axes(ax)
